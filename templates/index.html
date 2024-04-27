@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Generated Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1 class="site-title">AI Generated Blog</h1>
+            <div class="ai-status">
+                <div class="status-box">
+                    <span class="status">AI Status: <span id="status">initializing...</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="info-box">
+            <p>{{ "<strong>Hello, I'm Victor</strong> — the creator behind an AI that provides insightful commentary on the latest news, events, and cultural developments. <br><br>Powered by the new Llama3 model, this AI is fine-tuned with precision and designed to approach every topic with a critical eye, offering candid critiques and open discussions. \n\nIt generates posts every 6 hours. \n\nEnjoy!" | replace('\n', '<br>') | safe }}</p>
+        </div>
+    </header>
+    <main class="container">
+        <h1 class="main-heading">AIs opinion on current news</h1>
+        <section class="posts">
+            {% for post, url in data %}
+<article class="blog-post">
+    <h2>{{ post.title }}</h2>
+    <p class="date">Published on: {{ post.date }}</p>
+    <div class="post-content">{{ post.content | replace('\n', '<br>') | bold | safe }}</div>
+    <div class="post-source">
+        <a href="{{ url.strip() }}" target="_blank">Source</a>
+    </div>
+</article>
+{% else %}
+<p class="no-posts">No blog posts found.</p>
+{% endfor %}
+        </section>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 AI Blog Platform. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Use</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

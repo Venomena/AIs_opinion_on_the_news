@@ -1,0 +1,187 @@
+/* Base Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #333; /* Dark grey text for contrast */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.95) 30%, rgba(239, 250, 255, 0.95) 100%);
+}
+
+/* Apply the milk glass effect to the containers */
+.container, .header-container, .footer-container, .info-box {
+    backdrop-filter: blur(5px); /* This creates the frosted glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Optional: adds a light border */
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 40px;
+    border-radius: 8px; /* Rounded corners */
+    background: rgba(255, 255, 255, 0.85); /* Semi-transparent white background */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Apply the milk glass effect to the containers */
+.container, .header-container, .footer-container, .info-box, .blog-post {
+    backdrop-filter: blur(5px); /* This creates the frosted glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Optional: adds a light border */
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 8px; /* Rounded corners */
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: 40px; /* Add some distance from the header */
+    margin-bottom: 40px;
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    top: -50px; /* Overlaps the top edge of the container */
+    left: 0;
+    right: 0;
+    bottom: -50px; /* Overlaps the bottom edge of the container */
+    pointer-events: none;
+    background: inherit; /* Inherits the gradient background from the body */
+    z-index: -1;
+    border-radius: inherit; /* Inherits the border-radius from the container */
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 20px 40px;
+    border-bottom: 1px solid #eee; /* Subtle bottom border */
+    backdrop-filter: blur(5px);
+}
+
+header {
+    background-color: #fff; /* White background for header */
+    padding: 20px 40px;
+    border-bottom: 1px solid #eee; /* Subtle bottom border */
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-title {
+    font-size: 24px;
+    color: #333;
+}
+
+.ai-status {
+    background-color: #f9f9f9;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    animation: fade-in-out 2s infinite alternate; /* New animation */
+}
+
+@keyframes fade-in-out {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.status-box {
+    display: inline-block;
+    font-size: 16px;
+    color: #fff;
+    background-color: #333;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.info-box {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: 36px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.main-heading {
+    margin-bottom: 20px;
+}
+
+.blog-post {
+    background: rgba(255, 255, 255, 0.85); /* Slightly more transparency for blending */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05); /* Soften the shadow for a smoother look */
+    border: none; /* Optional: remove border for a cleaner transition */
+    color: #333;
+    margin-top: 20px; /* Add some space to the first blog post */
+    position: relative;
+    overflow: hidden;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column; /* Stack posts vertically */
+    align-items: center;
+    margin-top: -30px; /* Overlap posts with the top of the section for a blended transition */
+}
+
+.date {
+    font-style: italic;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.no-posts {
+    text-align: center;
+    font-style: italic;
+    color: #999;
+}
+
+footer {
+    background-color: #fff;
+    padding: 40px;
+    border-top: 1px solid #eee;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+footer nav li {
+    margin-left: 20px;
+}
+
+footer nav a {
+    color: #333;
+    text-decoration: none;
+}
+
+footer nav a:hover {
+    text-decoration: underline;
+}
+
+/* ... Add any additional CSS below ... */

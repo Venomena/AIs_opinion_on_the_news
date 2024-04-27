@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Posts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1 class="site-title">AI Blog Platform</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <h1>Blog Posts</h1>
+        <section class="posts">
+            {% if posts %}
+                {% for post in posts %}
+                    <article class="blog-post">
+                        <h2><a href="{{ url_for('blog_post', post_id=post.id) }}">{{ post.title }}</a></h2>
+                        <p class="date">Date: {{ post.date }}</p>
+                        <div class="post-content">{{ post.content.replace('\n', '
+') | safe }}</div>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <p class="no-posts">No blog posts found.</p>
+            {% endif %}
+        </section>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 AI Blog Platform. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Use</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
