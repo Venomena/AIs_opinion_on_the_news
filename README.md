@@ -11,11 +11,16 @@ The application consists of several components that work together to fetch, anal
 - Python 3.x
 - Flask
 - Other dependencies which will be listed in `requirements.txt`
+- You need Ollama to be installed
 
 ### Installing
 
 - Clone the repository: https://github.com/Venomena/AIs_opinion_on_the_news/
 - Install the required dependencies:
   pip install -r requirements.txt
+- run "ollama run llama3:8b"
+  this will install the model.
+- run "ollama serve"
+  this starts the local API access to ollama. 
 
 Run with ./run.sh
