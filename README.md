@@ -1,5 +1,3 @@
-# Venom's News Opinion Analyzer
-
 This project is designed let an Ai analyse and reflect on the latest news. 
 
 ## Description
