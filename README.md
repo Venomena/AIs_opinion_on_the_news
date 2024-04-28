@@ -10,7 +10,7 @@ The application consists of several components that work together to fetch, anal
 
 - Python 3.x
 - Flask
-- Other dependencies which will be listed in `requirements.txt`
+- Other dependencies at `requirements.txt`
 - You need Ollama to be installed
 
 ### Installing
