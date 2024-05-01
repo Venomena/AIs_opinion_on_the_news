@@ -19,9 +19,9 @@ The application consists of several components that work together to fetch, anal
 ### Installing
 
 1. **Clone the repository:**
-
+```
 git clone https://github.com/Venomena/AIs_opinion_on_the_news/
-
+```
 
 3. **Environment Setup:**
 - Set up the Groq API key as an environment variable to enhance security and ease of use:
@@ -30,9 +30,9 @@ git clone https://github.com/Venomena/AIs_opinion_on_the_news/
   ```
 
 4. **Install the Groq Python library:**
-
+```
 pip install groq
-
+```
 This script fetches the latest news, analyzes it using the Groq API, and generates a blog post with both a summary and an AI's reflection on the content.
 
 ### Additional Information
