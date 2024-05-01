@@ -1,8 +1,10 @@
-This project is designed let an Ai analyse and reflect on the latest news. 
+# AI's Opinion on the News
+
+This project is designed to let an AI analyze and reflect on the latest news.
 
 ## Description
 
-The application consists of several components that work together to fetch, analyze, and summarize news articles. The `generate_blog.py` script processes articles to create blog posts, while the `generate_sum.py` script provides summaries of articles for quick reading.
+The application consists of several components that work together to fetch, analyze, and summarize news articles. The `blog_utils.py` and `generate_blog.py` scripts process articles to create insightful blog posts that offer reflections on current events. Additionally, the `generate_sum.py` script provides concise summaries of articles for quick consumption.
 
 ## Getting Started
 
@@ -10,17 +12,30 @@ The application consists of several components that work together to fetch, anal
 
 - Python 3.x
 - Flask
-- Other dependencies at `requirements.txt`
-- You need Ollama to be installed
+- Requests
+- Groq API client
+- See all dependencies in `requirements.txt`
 
 ### Installing
 
-- Clone the repository: https://github.com/Venomena/AIs_opinion_on_the_news/
-- Install the required dependencies:
-  pip install -r requirements.txt
-- run "ollama run llama3:8b"
-  this will install the model.
-- run "ollama serve"
-  this starts the local API access to ollama. 
+1. **Clone the repository:**
 
-Run with ./run.sh
+git clone https://github.com/Venomena/AIs_opinion_on_the_news/
+
+
+3. **Environment Setup:**
+- Set up the Groq API key as an environment variable to enhance security and ease of use:
+  ```bash
+  export GROQ_API_KEY=<your-api-key-here>
+  ```
+
+4. **Install the Groq Python library:**
+
+pip install groq
+
+This script fetches the latest news, analyzes it using the Groq API, and generates a blog post with both a summary and an AI's reflection on the content.
+
+### Additional Information
+
+- Ensure your Groq API key is correctly set in your environment variables to authenticate API requests.
+- The application uses environment variables to manage API keys securely, preventing sensitive data from being hard-coded into the source code.
