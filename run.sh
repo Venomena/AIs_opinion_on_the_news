@@ -51,5 +51,5 @@ while true; do
     fi
     # Calculate the next time for a blog post generation, waiting for 6 hours
     echo "Next blog post will be generated after 5 sec."
-    sleep 20  # Adjusted for testing; originally planned for 6 hours
+    sleep 21600  # Adjusted for testing; originally planned for 6 hours
 done
