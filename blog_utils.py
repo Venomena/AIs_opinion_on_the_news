@@ -2,6 +2,8 @@ import requests
 from app import db, BlogPost
 from app import app, db, BlogPost
 import logging
+import os
+from groq import Groq
 
 # Configure logging at the start of your script or application
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -15,28 +17,29 @@ def some_function(data):
 
 # Define your actual LLM API endpoint and headers here
 #OLLAMA_HOST = '127.0.0.1:11444'
-LLM_API_ENDPOINT = 'http://127.0.0.1:11434/api/generate'
-LLM_API_HEADERS = {
-    'Content-Type': 'application/json',
+# LLM_API_ENDPOINT = 'https://api.groq.com/openai/v1'
+# GROQ_API_KEY="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"
+# LLM_API_HEADERS = {
+#     'Content-Type': 'application/json',
     # Add other necessary headers here
-}
+# }
+
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
 def call_llm_api(prompt):
     """
-    Calls an LLM API for content generation or summarization.
+    Calls the Groq API for content generation or summarization.
     """
-    payload = {
-        'model': 'llama3:8b',  # Adjust according to your LLM API
-        'prompt': prompt,
-        'max_tokens': 100  # Adjust as needed
-    }
     try:
-        response = requests.post(LLM_API_ENDPOINT, json=payload, headers=LLM_API_HEADERS)
-        response.raise_for_status()  # Raises an HTTPError for bad responses
-        return response.json().get('choices', [{}])[0].get('text', '')
-    except requests.RequestException as e:
-        print(f"Request to LLM API failed: {e}")
-        return "LLM API call failed."
+        chat_completion = client.chat.completions.create(
+            messages=[{"role": "user", "content": prompt}],
+            model="llama3-70b-8192"
+        )
+        return chat_completion.choices[0].message.content
+    except Exception as e:
+        print(f"Error calling Groq API: {e}")
+        return "Groq API call failed."
+
 
 def summarize_all_blogs():
     """

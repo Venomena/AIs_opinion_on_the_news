@@ -5,6 +5,8 @@ from app import app, db, BlogPost, AIStatus
 import json
 from newsapi import NewsApiClient
 import time
+import os
+from groq import Groq
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -61,31 +63,20 @@ def save_fetched_articles(fetched_articles):
         for article_url in fetched_articles:
             file.write(article_url + '\n')
 
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+# GROQ_API_KEY="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"
 def call_llm_api(prompt):
-    LLM_API_ENDPOINT = 'http://127.0.0.1:11434/api/generate'
-    LLM_API_HEADERS = {
-        'Content-Type': 'application/json',
-    }
-    payload = {
-        'model': 'llama3:8b',
-        'prompt': prompt,
-    }
     try:
-        response = requests.post(LLM_API_ENDPOINT, json=payload, headers=LLM_API_HEADERS)
-        response.raise_for_status()
-        full_response = ""
-        for line in response.iter_lines():
-            if line:
-                decoded_line = line.decode('utf-8')
-                json_line = json.loads(decoded_line)
-                full_response += json_line.get('response', '')
-                if json_line.get('done'):
-                    break
-        return full_response
+        chat_completion = client.chat.completions.create(
+            messages=[{"role": "user", "content": prompt}],
+            model="llama3-70b-8192"
+        )
+        return chat_completion.choices[0].message.content
     except Exception as e:
-        logging.error(f"Error calling LLM API: {e}")
+        logging.error(f"Error calling Groq API: {e}")
         update_ai_status("api error")
         return None
+
 
 def generate_blog_post_with_summary():
     update_ai_status("browsing")

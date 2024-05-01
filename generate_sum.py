@@ -2,6 +2,8 @@ import requests
 from app import db, BlogPost, app
 import logging
 from app import AIStatus
+from groq import Groq
+import os
 
 # Configure logging at the start of your script or application
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -18,31 +20,31 @@ def some_function(data):
     return result
 
 # Define your actual LLM API endpoint and headers here
-LLM_API_ENDPOINT = 'http://127.0.0.1:11434/api/generate'
+LLM_API_ENDPOINT = 'https://api.groq.com/openai/v1'
+GROQ_API_KEY='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'
 LLM_API_HEADERS = {
     'Content-Type': 'application/json',
     # Add any required headers here, such as Authorization tokens
     # 'Authorization': 'Bearer YOUR_TOKEN',
 }
 
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+
 def call_llm_api(prompt):
-    global ai_status
-    ai_status = "reading previous posts"
     """
-    Calls an LLM API for content generation or summarization.
+    Calls the Groq API for content generation or summarization.
     """
-    payload = {
-        'model': 'llama3:8b',  # Adjust the model name as necessary for your setup
-        'prompt': prompt,
-        'stream': False,
-    }
+    # GROQ_API_KEY="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"
     try:
-        response = requests.post(LLM_API_ENDPOINT, json=payload, headers=LLM_API_HEADERS)
-        response.raise_for_status()  # This will throw an error for non-200 responses
-        return response.json().get('response', '')
+        chat_completion = client.chat.completions.create(
+            messages=[{"role": "user", "content": prompt}],
+            model="llama3-70b-8192"
+        )
+        return chat_completion.choices[0].message.content
     except Exception as e:
-        print(f"Error calling LLM API: {e}")
-        return "Failed to generate content due to an API error."
+        print(f"Error calling Groq API: {e}")
+        return "Groq API call failed."
+
 
 def generate_and_save_summaries():
     """
